@@ -1,7 +1,7 @@
 $(document).ready(function() {
   $('.reload').hide();
   // creation classe du jeux plus  ou moins
-  var maxtmp=Math.floor(Math.random() * 1000)+1000;
+  var maxtmp = Math.floor(Math.random() * 1000) + 1000;
 
   var Game = function(max) {
     // Definition de la propirité answer meme si Max absent
@@ -27,13 +27,10 @@ $(document).ready(function() {
 
 
 
-// Fonctionalité de la page
+  // Fonctionalité de la page
 
   var play = new Game(maxtmp);
-$('input[type="range"]').prop('max', maxtmp);
-  console.log(play.max);
-  console.log(play.answer);
-
+  $('input[type="range"]').prop('max', maxtmp);
 
   $('input[name="go"]').on("click", function(e) {
     e.preventDefault();
@@ -49,6 +46,7 @@ $('input[type="range"]').prop('max', maxtmp);
       $('input[type="number"]').val('');
       $('.guess').hide();
       $('.reload').show();
+      $('.playAlone').hide();
     }
 
   });
@@ -56,20 +54,42 @@ $('input[type="range"]').prop('max', maxtmp);
 
   $('input[name="reload"]').on("click", function(e) {
     e.preventDefault();
-    var play = new Game(maxtmp);
+     play = new Game(maxtmp);
     $('input[type="range"]').prop('max', maxtmp);
     $('.guess').show();
     $('.reload').hide();
+    $('.playAlone').show();
   });
 
   $('input[name="playAlone"]').on("click", function(e) {
     e.preventDefault();
-    var essay =Math.floor(Math.random() * play.max);
-    $('input[type="range"]').val(essay);
-    $('input[type="number"]').val(essay);
-
+    playAlone(maxtmp, 0);
 
   });
+
+  function playAlone(max, min) {
+    var essay = Math.floor(Math.random() * (max - min)) + min;
+    $('input[type="range"]').val(essay);
+    $('input[type="number"]').val(essay);
+    var bet = play.test(essay);
+    console.log(bet);
+    if (bet) {
+      $(".jeuxTest").replaceWith('<p class="jeuxTest">' + bet + '</p>');
+      $('input[type="range"]').val($('input[type="number"]').val());
+      if (bet.match(/.*plus.*/i)) {
+        window.setTimeout(playAlone(max, essay), 3000);
+      } else {
+        window.setTimeout(playAlone(essay, min), 3000);
+      }
+
+    } else {
+      $(".jeuxTest").replaceWith('<p class="jeuxTest">Bravo !</p>');
+      $('input[type="number"]').val('');
+      $('.guess').hide();
+      $('.reload').show();
+      $('.playAlone').hide();
+    }
+  }
 
 
 });
