@@ -2,20 +2,36 @@
 <html lang="fr">
 
 <head>
-  <link rel="stylesheet" type="text/css" href="main.css"/>
+  <link rel="stylesheet" type="text/css" href="main.css" />
 
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <script src="main.js"></script>
 
 
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 </head>
 
 <body>
 
-<p class="jeux"></p>
+  <h1> Trouve moi ! </h1>
+  <input type="range" max="2000" min="0">
+  <div class="jeux">
+
+    <p class="jeuxTest"></p>
+    <form name="guess" class="guess">
+      <input type="number" required name="valeur" />
+      <input type="submit" name="go" value="essayer">
+    </form>
+    <form name="playAlone" class="playAlone">
+      <input type="submit" name="playAlone" value="Joue seul">
+    </form>
+    <form name="reload" class="reload">
+      <input type="submit" name="reload" value="rejouer">
+    </form>
+
+  </div>
 
 
 </body>
