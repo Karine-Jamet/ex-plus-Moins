@@ -42,7 +42,7 @@ $(document).ready(function() {
       $('input[type="number"]').val('');
 
     } else {
-      $(".jeuxTest").replaceWith('<p class="jeuxTest">Bravo !</p>');
+      $(".jeuxTest").replaceWith('<p class="jeuxTest">Bravo ! C\'est bien '+$('input[type="number"]').val()+'</p>');
       $('input[type="number"]').val('');
       $('.guess').hide();
       $('.reload').show();
@@ -77,13 +77,13 @@ $(document).ready(function() {
       $(".jeuxTest").replaceWith('<p class="jeuxTest">' + bet + '</p>');
       $('input[type="range"]').val($('input[type="number"]').val());
       if (bet.match(/.*plus.*/i)) {
-        window.setTimeout(playAlone(max, essay), 3000);
+        setTimeout(playAlone, 2000, max, essay);
       } else {
-        window.setTimeout(playAlone(essay, min), 3000);
+        setTimeout(playAlone, 2000, essay, min);
       }
 
     } else {
-      $(".jeuxTest").replaceWith('<p class="jeuxTest">Bravo !</p>');
+      $(".jeuxTest").replaceWith('<p class="jeuxTest">Bravo ! C\'est bien '+$('input[type="number"]').val()+'</p>');
       $('input[type="number"]').val('');
       $('.guess').hide();
       $('.reload').show();
